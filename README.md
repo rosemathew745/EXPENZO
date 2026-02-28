@@ -16,9 +16,7 @@ expenzo-ashen.vercel.app
 
 Project Description
 
-Expenzo is a web-based financial management application that helps users track their monthly expenses, manage budgets efficiently, visualize spending analytics, and simulate stock trading in a beginner-friendly environment.
-
-The platform combines practical expense management with a simple stock market simulator to promote financial awareness and smart money decisions.
+Expenzo is a web-based financial management application that helps users track their monthly expenses, manage budgets efficiently, visualize spending analytics
 
 The Problem Statement
 
