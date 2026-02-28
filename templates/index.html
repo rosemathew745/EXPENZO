@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if alert %}
+<div class="alert-box">
+    ⚠ Budget Exceeded! Reduce your expenses!
+</div>
+{% endif %}
+
+<div class="grid-container">
+
+    <!-- Set Budget -->
+    <div class="card">
+        <h3>Set Monthly Budget</h3>
+        <form action="/set_budget" method="POST">
+            <input type="number" name="budget" step="0.01" required placeholder="Enter Budget">
+            <button type="submit">Set Budget</button>
+        </form>
+    </div>
+
+    <!-- Summary -->
+    <div class="card">
+        <h3>Current Month: {{ month }}</h3>
+        <h2>Total Spent: ₹ {{ total }}</h2>
+        <h3>Budget: ₹ {{ budget }}</h3>
+        <h3 class="{{ 'danger' if remaining < 0 else 'safe' }}">
+            Remaining: ₹ {{ remaining }}
+        </h3>
+    </div>
+
+    <!-- Add Expense -->
+    <div class="card">
+        <h3>Add Expense</h3>
+        <form action="/add" method="POST">
+            <input type="text" name="title" required placeholder="Expense Title">
+            <input type="number" name="amount" step="0.01" required placeholder="Amount">
+            <button type="submit">Add Expense</button>
+        </form>
+    </div>
+
+    <!-- Expense List -->
+    <div class="card">
+        <h3>This Month Expenses</h3>
+
+        <ul id="expenseList">
+            {% if expenses %}
+                {% for expense in expenses %}
+                <li data-title="{{ expense[1] }}" data-amount="{{ expense[2] }}">
+                    <span>{{ expense[1] }} - ₹ {{ expense[2] }}</span>
+                    <a href="/delete/{{ expense[0] }}" class="delete">X</a>
+                </li>
+                {% endfor %}
+            {% else %}
+                <li>No expenses added yet.</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="card">
+        <h3>Expense Analytics</h3>
+        <canvas id="expenseChart"></canvas>
+    </div>
+
+    <!-- Monthly History -->
+    <div class="card">
+        <h3>Monthly History</h3>
+        <ul>
+            {% if history %}
+                {% for item in history %}
+                <li>{{ item[0] }} - ₹ {{ item[1] }}</li>
+                {% endfor %}
+            {% else %}
+                <li>No history available.</li>
+            {% endif %}
+        </ul>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const listItems = document.querySelectorAll("#expenseList li[data-title]");
+
+    const labels = [];
+    const amounts = [];
+
+    listItems.forEach(item => {
+        labels.push(item.getAttribute("data-title"));
+        amounts.push(parseFloat(item.getAttribute("data-amount")));
+    });
+
+    if (labels.length > 0) {
+        new Chart(document.getElementById("expenseChart"), {
+            type: "pie",
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: amounts
+                }]
+            }
+        });
+    }
+
+});
+</script>
+
+{% endblock %}

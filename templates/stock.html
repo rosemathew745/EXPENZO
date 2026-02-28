@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Market Simulator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>📈 Student Stock Market Simulator</h1>
+
+<h3>Balance: ₹<span id="balance">10000</span></h3>
+
+<div>
+    <p>
+        TechStar - ₹<span id="techPrice">500</span>
+        <button onclick="buyStock('tech')">Buy</button>
+        <button onclick="sellStock('tech')">Sell</button>
+    </p>
+
+    <p>
+        FoodHub - ₹<span id="foodPrice">300</span>
+        <button onclick="buyStock('food')">Buy</button>
+        <button onclick="sellStock('food')">Sell</button>
+    </p>
+
+    <p>
+        StudyPro - ₹<span id="studyPrice">200</span>
+        <button onclick="buyStock('study')">Buy</button>
+        <button onclick="sellStock('study')">Sell</button>
+    </p>
+</div>
+
+<h3>📦 Portfolio</h3>
+<ul id="portfolio"></ul>
+
+<h3>Total Wealth: ₹<span id="totalWealth">10000</span></h3>
+
+<h3 id="result"></h3>
+
+<button onclick="updatePrices()">🔄 Simulate Market Change</button>
+
+<br><br>
+<a href="/">⬅ Back to Home</a>
+
+<script src="{{ url_for('static', filename='stock.js') }}"></script>
+
+</body>
+</html>
