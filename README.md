@@ -1,4 +1,4 @@
-Expenzo – Smart Expense & Stock Simulator 🎯
+Expenzo – Smart Expense 🎯
 
 Basic Details
 
