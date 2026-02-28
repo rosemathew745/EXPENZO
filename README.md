@@ -12,7 +12,7 @@ Member 2 – Nimisha Brijit Joshy
 
 Hosted Project Link
 
-(Add deployment link here if available)
+expenzo-ashen.vercel.app
 
 Project Description
 
